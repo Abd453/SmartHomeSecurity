@@ -153,7 +153,10 @@ export default function AccountPage() {
                 Enable Two-Factor Authentication
               </button>
               <button className="px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors w-full">
-                Change Password
+                Link Another Gmail Account
+              </button>
+              <button className="px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors w-full">
+                View Recent Login Activity
               </button>
             </div>
           </section>
