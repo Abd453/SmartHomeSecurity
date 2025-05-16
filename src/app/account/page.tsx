@@ -1,8 +1,7 @@
 "use client"
 
-import { Bell, User, Video} from "lucide-react"
-import Link from "next/link"
 import { useState } from "react"
+import Sidebar from "@/components/Sidebar"
 
 export default function AccountPage() {
   const [allMotionAlerts, setAllMotionAlerts] = useState(true)
@@ -13,57 +12,7 @@ export default function AccountPage() {
   return (
     <div className="min-h-screen bg-[#0a0f1c] text-white flex">
       {/* Sidebar */}
-      <div className="w-20 md:w-64 border-r border-white/10 flex flex-col">
-        {/* Logo */}
-        <div className="p-4 border-b border-white/10 flex items-center justify-center md:justify-start gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
-            Logo
-          </div>
-          <h1 className="text-xl font-bold hidden md:block">GuardianEye</h1>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 p-2">
-          <ul className="space-y-2">
-            {/* <li>
-              <Link
-                href="/"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
-              >
-                <Settings size={20} />
-                <span className="hidden md:block">Dashboard</span>
-              </Link>
-            </li> */}
-            <li>
-              <Link
-                href="/live"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
-              >
-                <Video size={20} />
-                <span className="hidden md:block">Live</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/notifications"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
-              >
-                <Bell size={20} />
-                <span className="hidden md:block">Notification</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/account"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg bg-white/10 text-white"
-              >
-                <User size={20} />
-                <span className="hidden md:block">Account</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Sidebar />
 
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
@@ -71,9 +20,9 @@ export default function AccountPage() {
           <h1 className="text-2xl font-bold mb-6">Settings</h1>
 
           {/* User Profile */}
-          <div className="bg-[#111827] rounded-xl p-6 mb-6">
+          <section className="bg-[#111827] rounded-xl p-6 mb-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-gray-400">JD</div>
+              <div className="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center text-gray-400 font-semibold">JD</div>
               <div>
                 <h2 className="font-medium">John Doe</h2>
                 <p className="text-sm text-gray-400">john.doe@gmail.com</p>
@@ -82,10 +31,10 @@ export default function AccountPage() {
             <button className="mt-4 px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors">
               Sign Out
             </button>
-          </div>
+          </section>
 
           {/* Device Management */}
-          <div className="bg-[#111827] rounded-xl p-6 mb-6">
+          <section className="bg-[#111827] rounded-xl p-6 mb-6">
             <h2 className="font-medium mb-4">Device Management</h2>
 
             <div className="border-b border-white/10 pb-4 mb-4">
@@ -104,13 +53,14 @@ export default function AccountPage() {
             <button className="px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors w-full">
               Test Connection
             </button>
-          </div>
+          </section>
 
           {/* Notification Preferences */}
-          <div className="bg-[#111827] rounded-xl p-6 mb-6">
+          <section className="bg-[#111827] rounded-xl p-6 mb-6">
             <h2 className="font-medium mb-4">Notification Preferences</h2>
 
             <div className="space-y-4">
+              {/* All Motion Alerts */}
               <div className="flex justify-between items-center">
                 <span>All Motion Alerts</span>
                 <button
@@ -123,6 +73,7 @@ export default function AccountPage() {
                 </button>
               </div>
 
+              {/* Time-based Alerts */}
               <div className="flex justify-between items-center">
                 <span>Time-based Alerts</span>
                 <button
@@ -135,6 +86,7 @@ export default function AccountPage() {
                 </button>
               </div>
 
+              {/* Sound Alerts */}
               <div className="flex justify-between items-center">
                 <span>Sound Alerts</span>
                 <button
@@ -147,10 +99,10 @@ export default function AccountPage() {
                 </button>
               </div>
             </div>
-          </div>
+          </section>
 
           {/* Storage & Recordings */}
-          <div className="bg-[#111827] rounded-xl p-6 mb-6">
+          <section className="bg-[#111827] rounded-xl p-6 mb-6">
             <h2 className="font-medium mb-4">Storage & Recordings</h2>
 
             <div className="mb-4">
@@ -190,10 +142,10 @@ export default function AccountPage() {
             <button className="px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors w-full">
               Clear Old Recordings
             </button>
-          </div>
+          </section>
 
           {/* Security Options */}
-          <div className="bg-[#111827] rounded-xl p-6">
+          <section className="bg-[#111827] rounded-xl p-6">
             <h2 className="font-medium mb-4">Security Options</h2>
 
             <div className="space-y-3">
@@ -201,13 +153,10 @@ export default function AccountPage() {
                 Enable Two-Factor Authentication
               </button>
               <button className="px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors w-full">
-                Link Another Gmail Account
-              </button>
-              <button className="px-4 py-2 bg-[#1f2937] hover:bg-[#1f2937]/80 rounded text-sm transition-colors w-full">
-                View Recent Login Activity
+                Change Password
               </button>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
