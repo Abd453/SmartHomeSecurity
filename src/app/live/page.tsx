@@ -13,33 +13,76 @@ export default function LivePage() {
   ];
 
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isStreamLoading, setIsStreamLoading] = useState(false);
+  const [isStreamError, setIsStreamError] = useState(false);
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
 
+  const handleStreamLoad = () => {
+    setIsStreamLoading(false);
+  };
+
+  const handleStreamError = () => {
+    setIsStreamLoading(false);
+    setIsStreamError(true);
+  };
+
   return (
-    <div className={`min-h-screen bg-[#0a0f1c] text-white flex ${isFullscreen ? "fixed inset-0 z-50" : ""}`}>
+    <div
+      className={`min-h-screen bg-[#0a0f1c] text-white flex ${
+        isFullscreen ? "fixed inset-0 z-50" : ""
+      }`}
+    >
       <Sidebar />
 
-      <div className="flex-1 flex flex-col md:flex-row">
+      <div className="flex-1 flex flex-col lg:flex-row">
         {/* Live Stream */}
-        <div className={`flex-1 p-6 ${isFullscreen ? "fixed inset-0 z-50 bg-black" : ""} transition-all duration-300`}>
+        <div
+          className={`flex-1 p-6 ${
+            isFullscreen ? "fixed inset-0 z-50 bg-black" : ""
+          } transition-all duration-300`}
+        >
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-bold">Live Stream</h1>
             <div className="text-sm text-gray-400 flex items-center">
-              <span className="w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-              Camera Active
+              <span
+                className={`w-2 h-2 rounded-full mr-2 ${
+                  isStreamError
+                    ? "bg-red-500"
+                    : isStreamLoading
+                    ? "bg-yellow-500"
+                    : "bg-green-500"
+                }`}
+              ></span>
+              {isStreamError
+                ? "Stream Error"
+                : isStreamLoading
+                ? "Loading Stream"
+                : "Camera Active"}
             </div>
           </div>
 
           <div className="relative aspect-video bg-black/50 rounded-lg overflow-hidden flex items-center justify-center mb-4">
-            <div className="text-gray-500 text-lg">1920 × 1080</div>
-
-            {/* Play Button */}
-            <button className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity">
-              <Play size={50} className="text-white" />
-            </button>
+            {isStreamError ? (
+              <div className="text-red-500 text-lg">Failed to load stream</div>
+            ) : (
+              <>
+                <img
+                  src="https://8a96-196-189-233-4.ngrok-free.app/mjpeg/1"
+                  alt="Live Stream"
+                  className="w-full h-full object-cover"
+                  // onLoad={handleStreamLoad}
+                  onError={handleStreamError}
+                />
+                {isStreamLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                    <div className="text-gray-500 text-lg">Loading...</div>
+                  </div>
+                )}
+              </>
+            )}
 
             {/* Fullscreen Toggle */}
             <button
@@ -53,7 +96,7 @@ export default function LivePage() {
 
         {/* Right Sidebar - Recent Recordings */}
         {!isFullscreen && (
-          <div className="w-full md:w-72 border-t md:border-t-0 md:border-l border-white/10 p-4">
+          <div className="w-full lg:w-72 border-t md:border-t-0 md:border-l border-white/10 p-4">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-medium">Motion Recordings</h2>
               <button className="flex items-center gap-1 text-xs bg-[#1f2937] px-3 py-2 rounded hover:bg-[#1f2937]/80 transition-colors">

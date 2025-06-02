@@ -1,18 +1,25 @@
-"use client"
+"use client";
 
-import { Bell, User, Video } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { Bell, User, Video } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Sidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <div className="w-20 md:w-64 border-r border-white/10 flex flex-col">
       {/* Logo */}
       <div className="p-4 border-b border-white/10 flex items-center justify-center md:justify-start gap-3">
         <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
-          Logo
+          <Image
+            src="/images/logo.jpg"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="rounded-full object-cover"
+          />
         </div>
         <h1 className="text-xl font-bold hidden md:block">GuardianEye</h1>
       </div>
@@ -62,5 +69,5 @@ export default function Sidebar() {
         </ul>
       </nav>
     </div>
-  )
+  );
 }

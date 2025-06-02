@@ -1,7 +1,9 @@
-"use client"
+"use client";
 
-import { Bell, User, Video } from "lucide-react"
-import Link from "next/link"
+import Sidebar from "@/components/Sidebar";
+import { Bell, User, Video } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function NotificationsPage() {
   const notifications = [
@@ -45,62 +47,12 @@ export default function NotificationsPage() {
       isNew: false,
       hasRecording: true,
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-[#0a0f1c] text-white flex">
       {/* Sidebar */}
-      <div className="w-20 md:w-64 border-r border-white/10 flex flex-col">
-        {/* Logo */}
-        <div className="p-4 border-b border-white/10 flex items-center justify-center md:justify-start gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
-            Logo
-          </div>
-          <h1 className="text-xl font-bold hidden md:block">GuardianEye</h1>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 p-2">
-          <ul className="space-y-2">
-            {/* <li>
-              <Link
-                href="/"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
-              >
-                <Home size={20} />
-                <span className="hidden md:block">Dashboard</span>
-              </Link>
-            </li> */}
-            <li>
-              <Link
-                href="/live"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
-              >
-                <Video size={20} />
-                <span className="hidden md:block">Live</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/notifications"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg bg-white/10 text-white"
-              >
-                <Bell size={20} />
-                <span className="hidden md:block">Notification</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/account"
-                className="flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
-              >
-                <User size={20} />
-                <span className="hidden md:block">Account</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Sidebar />
 
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
@@ -116,11 +68,20 @@ export default function NotificationsPage() {
 
           <div className="space-y-4">
             {notifications.map((notification) => (
-              <div key={notification.id} className="bg-[#111827] rounded-xl overflow-hidden border border-white/10">
+              <div
+                key={notification.id}
+                className="bg-[#111827] rounded-xl overflow-hidden border border-white/10"
+              >
                 <div className="flex flex-col md:flex-row">
                   {/* Image placeholder */}
                   <div className="md:w-64 aspect-video bg-gray-800 flex items-center justify-center text-gray-500 text-sm">
-                    400 × 225
+                    <Image
+                      src="/images/logo.jpg"
+                      alt="Logo"
+                      width={40}
+                      height={40}
+                      className=" object-cover"
+                    />
                   </div>
 
                   {/* Content */}
@@ -128,9 +89,13 @@ export default function NotificationsPage() {
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="font-medium">Motion detected in {notification.location}</h3>
+                          <h3 className="font-medium">
+                            Motion detected in {notification.location}
+                          </h3>
                           {notification.isNew && (
-                            <span className="px-2 py-0.5 bg-[#00a3ff] text-white text-xs rounded-full">New</span>
+                            <span className="px-2 py-0.5 bg-[#00a3ff] text-white text-xs rounded-full">
+                              New
+                            </span>
                           )}
                         </div>
                         <p className="text-sm text-gray-400 mt-1">
@@ -152,5 +117,5 @@ export default function NotificationsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
